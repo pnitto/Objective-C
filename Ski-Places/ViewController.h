@@ -7,9 +7,21 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MapKit/MapKit.h>
+#import <CoreLocation/CoreLocation.h>
 
-@interface ViewController : UIViewController
-
+@interface ViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, MKMapViewDelegate>
+@property (nonatomic, strong) CLLocationManager *locationManager;
+@property(assign, nonatomic) CLLocationDistance distanceFiler;
+@property (nonatomic, retain) CLRegion *region;
+@property(assign, nonatomic) CLLocationDistance radius;
+@property (weak, nonatomic) IBOutlet MKMapView *mapView;
+@property (weak, nonatomic) IBOutlet UILabel *longLabel;
+@property (weak, nonatomic) IBOutlet UILabel *latLabel;
+@property (nonatomic, strong) NSMutableArray *skiPlaces;
+@property (weak, nonatomic) IBOutlet UITableView *randomTable;
 
 @end
+
+
 
