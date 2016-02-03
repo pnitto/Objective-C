@@ -15,7 +15,7 @@
 
 -(void)viewDidLoad {
     [super viewDidLoad];
-    
+    /*
     if ([MFMailComposeViewController canSendMail])
     {
         MFMailComposeViewController *mail = [[MFMailComposeViewController alloc] init];
@@ -30,7 +30,9 @@
     {
         NSLog(@"This device cannot send email");
     }
+     */
 }
+/*
 - (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
 {
     switch (result) {
@@ -53,5 +55,6 @@
     
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
+ */
 
 @end

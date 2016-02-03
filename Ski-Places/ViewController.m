@@ -216,9 +216,57 @@
     aView.pinTintColor = UIColor.greenColor;
     aView.leftCalloutAccessoryView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
     [(UIImageView *)aView.leftCalloutAccessoryView setImage:[UIImage imageNamed:@"boarding"]];
+    
+    UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+    [rightButton addTarget:self action:@selector(showDetail:) forControlEvents:UIControlEventTouchUpInside];
+    rightButton.tintColor = UIColor.redColor;
+    aView.rightCalloutAccessoryView = rightButton;
+    aView.enabled = YES;
+    
     aView.annotation = annotation;
     return aView;
 }
+-(void)showDetail:(id)sender{
+    UIView *showView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
+    showView.backgroundColor = UIColor.greenColor;
+    NSLog(@"Right view clicked");
+}
 
+
+/*
+
+-(void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
+    UIView *customView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 200, 100)];
+    customView.backgroundColor = [UIColor colorWithRed:0.000 green:0.690 blue:0.313 alpha:0.5];
+    customView.center = CGPointMake(mapView.frame.size.width/ 2, mapView.frame.size.height/2);
+    
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 300, 100)];
+    label.text = @"This is a tooltip";
+    label.textColor = [UIColor whiteColor];
+    [customView addSubview:label];
+    [self.mapView addSubview:customView];
+    [customView removeFromSuperview];
+}
+*/
+- (IBAction)centerOnUser:(id)sender {
+    
+    MKCoordinateRegion theRegion;
+    
+    //Center
+    CLLocationCoordinate2D center;
+    center.latitude =  36.12743641786611;
+    center.longitude = -81.85981750488281;
+    
+    //Span
+    MKCoordinateSpan span;
+    span.latitudeDelta = 0.30f;
+    span.longitudeDelta   = 0.30f;
+    
+    theRegion.center = center;
+    theRegion.span = span;
+
+    [self.mapView setRegion:theRegion animated:YES];
+
+}
 
 @end

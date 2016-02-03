@@ -40,7 +40,7 @@
 		2A57684C1C5AECB600947B25 /* SecondViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SecondViewController.h; path = ../SecondViewController.h; sourceTree = "<group>"; };
 		2A57684D1C5AECB600947B25 /* SecondViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SecondViewController.m; path = ../SecondViewController.m; sourceTree = "<group>"; };
 		2A57684F1C5AED1800947B25 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
-		2A5768511C5AF37400947B25 /* Location.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Location.gpx; sourceTree = "<group>"; };
+		2A5768511C5AF37400947B25 /* Location.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = Location.gpx; path = ../Location.gpx; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,7 +60,6 @@
 		2A57681F1C5AD74E00947B25 = {
 			isa = PBXGroup;
 			children = (
-				2A5768511C5AF37400947B25 /* Location.gpx */,
 				2A57684F1C5AED1800947B25 /* MessageUI.framework */,
 				2A5768471C5AEB9C00947B25 /* CoreLocation.framework */,
 				2A5768451C5AEB8F00947B25 /* MapKit.framework */,
@@ -80,6 +79,7 @@
 		2A57682A1C5AD74F00947B25 /* Ski-Places */ = {
 			isa = PBXGroup;
 			children = (
+				2A5768511C5AF37400947B25 /* Location.gpx */,
 				2A57682E1C5AD74F00947B25 /* AppDelegate.h */,
 				2A57682F1C5AD74F00947B25 /* AppDelegate.m */,
 				2A57684C1C5AECB600947B25 /* SecondViewController.h */,

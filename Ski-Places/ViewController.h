@@ -20,6 +20,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *latLabel;
 @property (nonatomic, strong) NSMutableArray *skiPlaces;
 @property (weak, nonatomic) IBOutlet UITableView *randomTable;
+- (IBAction)centerOnUser:(id)sender;
 
 @end
 
