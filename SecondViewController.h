@@ -22,5 +22,6 @@
 @property (strong,nonatomic) NSMutableArray *dataArray;
 @property (weak, nonatomic) id<SecondViewControllerDelegate> delegate;
 @property (weak, nonatomic) IBOutlet UILabel *skiPlaceName;
+@property (weak, nonatomic) IBOutlet UILabel *placeDescription;
 
 @end

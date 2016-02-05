@@ -237,6 +237,7 @@
     detailViewController.delegate = self;
     [self presentViewController:detailViewController animated:YES completion:nil];
     detailViewController.skiPlaceName.text = details.title;
+    detailViewController.placeDescription.text = details.subtitle;
 }
 -(void)secondViewControllerIsDone:(SecondViewController *)SecondViewController {
     [self dismissViewControllerAnimated:YES completion:nil];
