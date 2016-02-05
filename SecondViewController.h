@@ -9,6 +9,18 @@
 #import <UIKit/UIKit.h>
 #import <MessageUI/MessageUI.h>
 
-@interface SecondViewController : UIViewController <MFMailComposeViewControllerDelegate>
+//Forward Declaration
+@class SecondViewController;
+
+@protocol SecondViewControllerDelegate <NSObject>
+- (void)secondViewControllerIsDone:(SecondViewController *)SecondViewController;
+
+@end
+
+@interface SecondViewController : UIViewController
+@property (weak, nonatomic) NSString *strPlaceName;
+@property (strong,nonatomic) NSMutableArray *dataArray;
+@property (weak, nonatomic) id<SecondViewControllerDelegate> delegate;
+@property (weak, nonatomic) IBOutlet UILabel *skiPlaceName;
 
 @end

@@ -18,7 +18,8 @@
 //#define sugarmnt -81.85981750488281,36.12743641786611
 
 @interface ViewController ()
-<CLLocationManagerDelegate>
+<CLLocationManagerDelegate,
+ SecondViewControllerDelegate>
 @end
 
 @implementation ViewController
@@ -195,6 +196,7 @@
             NSLog(@"This is an empty array");
         }
     }
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     return cell;
 }
 //when a cell is clicked in the table a callout appears above the pin with that objects info
@@ -218,7 +220,8 @@
     [(UIImageView *)aView.leftCalloutAccessoryView setImage:[UIImage imageNamed:@"boarding"]];
     
     UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
-    [rightButton addTarget:self action:@selector(showDetail:) forControlEvents:UIControlEventTouchUpInside];
+    //[rightButton addTarget:self action:@selector(showDetail:) forControlEvents:UIControlEventTouchUpInside];
+    
     rightButton.tintColor = UIColor.redColor;
     aView.rightCalloutAccessoryView = rightButton;
     aView.enabled = YES;
@@ -226,28 +229,19 @@
     aView.annotation = annotation;
     return aView;
 }
--(void)showDetail:(id)sender{
-    UIView *showView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
-    showView.backgroundColor = UIColor.greenColor;
-    NSLog(@"Right view clicked");
+-(void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
+    Pins *details = view.annotation;
+    NSLog(@"details: %@", view.annotation.title);
+    SecondViewController *detailViewController = [[SecondViewController alloc] init];
+    //[[self navigationController] pushViewController:detailViewController animated:YES];
+    detailViewController.delegate = self;
+    [self presentViewController:detailViewController animated:YES completion:nil];
+    detailViewController.skiPlaceName.text = details.title;
+}
+-(void)secondViewControllerIsDone:(SecondViewController *)SecondViewController {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-
-/*
-
--(void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
-    UIView *customView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 200, 100)];
-    customView.backgroundColor = [UIColor colorWithRed:0.000 green:0.690 blue:0.313 alpha:0.5];
-    customView.center = CGPointMake(mapView.frame.size.width/ 2, mapView.frame.size.height/2);
-    
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 300, 100)];
-    label.text = @"This is a tooltip";
-    label.textColor = [UIColor whiteColor];
-    [customView addSubview:label];
-    [self.mapView addSubview:customView];
-    [customView removeFromSuperview];
-}
-*/
 - (IBAction)centerOnUser:(id)sender {
     
     MKCoordinateRegion theRegion;
@@ -266,7 +260,27 @@
     theRegion.span = span;
 
     [self.mapView setRegion:theRegion animated:YES];
-
 }
+/*
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    SecondViewController *vc;
+    vc = [segue destinationViewController];
+}
+*/
+/*
+ -(void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
+ UIView *customView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 200, 100)];
+ customView.backgroundColor = [UIColor colorWithRed:0.000 green:0.690 blue:0.313 alpha:0.5];
+ customView.center = CGPointMake(mapView.frame.size.width/ 2, mapView.frame.size.height/2);
+ 
+ UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 300, 100)];
+ label.text = @"This is a tooltip";
+ label.textColor = [UIColor whiteColor];
+ [customView addSubview:label];
+ [self.mapView addSubview:customView];
+ [customView removeFromSuperview];
+ }
+ */
+
 
 @end
