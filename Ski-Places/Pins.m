@@ -9,5 +9,5 @@
 #import "Pins.h"
 
 @implementation Pins
-@synthesize coordinate, title, subtitle;
+@synthesize coordinate, title, subtitle, averageRating,rating;
 @end

@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import "Pins.h"
 #import "SecondViewController.h"
+#import "CameraViewController.h"
 #define METERS_MILE 1609.344
 #define METERS_FEET 3.28084
 #define beechLat -81.87767028808594
@@ -19,7 +20,8 @@
 
 @interface ViewController ()
 <CLLocationManagerDelegate,
- SecondViewControllerDelegate>
+ SecondViewControllerDelegate,
+CameraViewControllerDelegate>
 @end
 
 @implementation ViewController
@@ -74,6 +76,7 @@
     myPins.coordinate = location;
     myPins.title = @"Sugar Mountain";
     myPins.subtitle = @"Great Snowboarding";
+    myPins.averageRating = [[NSMutableArray alloc]init];
     [self.skiPlaces addObject:myPins];
     
     myPins = [[Pins alloc] init];
@@ -82,6 +85,7 @@
     myPins.coordinate = location;
     myPins.title = @"Beech Mountain";
     myPins.subtitle = @"Great Snowboarding";
+    myPins.averageRating = [[NSMutableArray alloc]init];
     [self.skiPlaces addObject:myPins];
     
     myPins =[[Pins alloc] init];
@@ -90,6 +94,7 @@
     myPins.coordinate = location;
     myPins.title = @"App Ski Resort";
     myPins.subtitle = @"Cool Terrain Parks";
+    myPins.averageRating = [[NSMutableArray alloc]init];
     [self.skiPlaces addObject:myPins];
     
     myPins = [[Pins alloc] init];
@@ -97,7 +102,8 @@
     location.longitude = -83.0921527;
     myPins.coordinate = location;
     myPins.title = @"Cataloochee Ski Resort";
-    myPins.subtitle = @"18 Slopes";
+    myPins.subtitle = @"Cool Rail Section";
+    myPins.averageRating = [[NSMutableArray alloc] init];
     [self.skiPlaces addObject:myPins];
     
     //adding all the pins to mapView
@@ -117,7 +123,7 @@
     CLLocationCoordinate2D skiCenter = CLLocationCoordinate2DMake(36.16305869763924,-81.87080383300781);
     CLRegion *skiRegion = [[CLCircularRegion alloc] initWithCenter:skiCenter radius:3000 identifier:@"SkiRegion"];
     [self.locationManager startMonitoringForRegion:skiRegion];
-    NSLog(@"Ski Region: %@", skiRegion);
+    //NSLog(@"Ski Region: %@", skiRegion);
     /*
      //manhattan region
      CLLocationCoordinate2D Mancenter = CLLocationCoordinate2DMake(40.759211, -73.984638);
@@ -132,10 +138,12 @@
      NSLog(@"South Region %@", southRegion);
      */
 }
+
 //tells delegate the location of the user was updated.
 -(void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation {
     self.mapView.centerCoordinate = userLocation.location.coordinate;
 }
+
 -(void) locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations {
     CLLocation *location = locations.lastObject;
     NSLog(@"location list: %@", location);
@@ -188,12 +196,12 @@
     NSMutableArray *names = [[NSMutableArray alloc] init];
     for( Pins *loc in self.skiPlaces) {
         [names addObject:loc.title];
-        NSLog(@"Name: %@",names);
+        //NSLog(@"Name: %@",names);
         if([names count] > 0 && [names count] > indexPath.row){
             cell.textLabel.text = [names objectAtIndex:indexPath.row];
         }
         else {
-            NSLog(@"This is an empty array");
+            //NSLog(@"This is an empty array");
         }
     }
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -205,8 +213,8 @@
     NSLog(@"Clicked %@", cell.textLabel.text);
     [self.mapView selectAnnotation:[self.skiPlaces objectAtIndex:indexPath.row] animated:YES];
 }
-
 // checks to see if the class is a user's location object, adds an image to the leftcalloutaccessory, changed pin color to green
+
 -(MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
     
     if ([annotation isKindOfClass:[MKUserLocation class]])
@@ -225,21 +233,33 @@
     rightButton.tintColor = UIColor.redColor;
     aView.rightCalloutAccessoryView = rightButton;
     aView.enabled = YES;
-    
     aView.annotation = annotation;
     return aView;
 }
+
 -(void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
+    SecondViewController *detailViewController = [[SecondViewController alloc] init];
+    detailViewController.delegate = self;
+
+    [self presentViewController:detailViewController animated:YES completion:nil];
     Pins *details = view.annotation;
     NSLog(@"details: %@", view.annotation.title);
-    SecondViewController *detailViewController = [[SecondViewController alloc] init];
-    //[[self navigationController] pushViewController:detailViewController animated:YES];
-    detailViewController.delegate = self;
-    [self presentViewController:detailViewController animated:YES completion:nil];
+
+    //[self.navigationController pushViewController:detailViewController animated:YES];
     detailViewController.skiPlaceName.text = details.title;
     detailViewController.placeDescription.text = details.subtitle;
+    detailViewController.ratingArray = details.averageRating;
+    detailViewController.averageRating = details.rating;
+
+    NSLog(@"Name: %@, Average: %@",details.title, details.rating);
+    NSLog(@"Rating List: %@", details.averageRating);
 }
 -(void)secondViewControllerIsDone:(SecondViewController *)SecondViewController {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+-(void)cameraViewControllerIsDone:(CameraViewController *)CameraViewController {
+    NSLog(@"Tapped Back button for camera");
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -262,26 +282,4 @@
 
     [self.mapView setRegion:theRegion animated:YES];
 }
-/*
--(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    SecondViewController *vc;
-    vc = [segue destinationViewController];
-}
-*/
-/*
- -(void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
- UIView *customView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 200, 100)];
- customView.backgroundColor = [UIColor colorWithRed:0.000 green:0.690 blue:0.313 alpha:0.5];
- customView.center = CGPointMake(mapView.frame.size.width/ 2, mapView.frame.size.height/2);
- 
- UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 300, 100)];
- label.text = @"This is a tooltip";
- label.textColor = [UIColor whiteColor];
- [customView addSubview:label];
- [self.mapView addSubview:customView];
- [customView removeFromSuperview];
- }
- */
-
-
 @end

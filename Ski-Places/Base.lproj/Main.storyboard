@@ -3,12 +3,12 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
     </dependencies>
     <scenes>
         <!--Ski Places-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
                 <viewController title="Ski Places" id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
@@ -78,7 +78,21 @@
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Ski Places" id="33Z-S7-et1">
-                        <barButtonItem key="rightBarButtonItem" id="iN9-Ro-d49"/>
+                        <rightBarButtonItems>
+                            <barButtonItem id="iN9-Ro-d49"/>
+                            <barButtonItem style="plain" id="HRd-5z-Q3K">
+                                <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="9id-PY-ayl">
+                                    <rect key="frame" x="136" y="564" width="145" height="30"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <state key="normal" title="Camera Button">
+                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <connections>
+                                        <segue destination="DQO-zO-90Y" kind="presentation" id="8JZ-yc-Zup"/>
+                                    </connections>
+                                </button>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
@@ -88,13 +102,54 @@
                         <outlet property="randomTable" destination="eP6-RJ-Ega" id="2ww-d3-7cU"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1000" y="-34"/>
+        </scene>
+        <!--Camera View Controller-->
+        <scene sceneID="ynG-pa-1l1">
+            <objects>
+                <viewController id="DQO-zO-90Y" customClass="CameraViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ww9-D1-Vf1"/>
+                        <viewControllerLayoutGuide type="bottom" id="0NJ-qm-xEf"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="DGd-Ou-gQD">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ceW-wH-OHz">
+                                <rect key="frame" x="10" y="74" width="354" height="255"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mVI-Ax-ite">
+                                <rect key="frame" x="41" y="12" width="84" height="30"/>
+                                <state key="normal" title="Back"/>
+                                <connections>
+                                    <action selector="backButtonPressed:" destination="DQO-zO-90Y" eventType="touchUpInside" id="Ajo-54-xLW"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hDv-F9-nqO">
+                                <rect key="frame" x="136" y="382" width="103" height="30"/>
+                                <state key="normal" title="Take Picture"/>
+                                <connections>
+                                    <action selector="takePicture:" destination="DQO-zO-90Y" eventType="touchUpInside" id="f61-F2-IHl"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="imageView" destination="ceW-wH-OHz" id="1MB-Tw-Pwf"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6OW-2b-j2O" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1682" y="-34"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="YpX-Fj-8U1">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="OFA-VJ-Wqx" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="NavigationControllerID" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="OFA-VJ-Wqx" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="4zr-x8-GeO">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>

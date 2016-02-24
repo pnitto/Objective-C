@@ -21,6 +21,8 @@
 		2A5768501C5AED1800947B25 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A57684F1C5AED1800947B25 /* MessageUI.framework */; };
 		2A5768531C63CD8900947B25 /* SecondViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2A5768521C63CD8900947B25 /* SecondViewController.xib */; };
 		2A5768551C63DE8700947B25 /* Notes.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A5768541C63DE8700947B25 /* Notes.m */; };
+		2A5768581C6517C600947B25 /* RateVIew.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A5768571C6517C600947B25 /* RateVIew.m */; };
+		2AE0E4851C7BB92B0050ACA8 /* CameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AE0E4841C7BB92B0050ACA8 /* CameraViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +47,10 @@
 		2A5768511C5AF37400947B25 /* Location.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = Location.gpx; path = ../Location.gpx; sourceTree = "<group>"; };
 		2A5768521C63CD8900947B25 /* SecondViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SecondViewController.xib; sourceTree = "<group>"; };
 		2A5768541C63DE8700947B25 /* Notes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Notes.m; sourceTree = "<group>"; };
+		2A5768561C6517C600947B25 /* RateVIew.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RateVIew.h; sourceTree = "<group>"; };
+		2A5768571C6517C600947B25 /* RateVIew.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RateVIew.m; sourceTree = "<group>"; };
+		2AE0E4831C7BB92B0050ACA8 /* CameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraViewController.h; sourceTree = "<group>"; };
+		2AE0E4841C7BB92B0050ACA8 /* CameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,9 +98,13 @@
 				2A5768311C5AD74F00947B25 /* ViewController.h */,
 				2A5768321C5AD74F00947B25 /* ViewController.m */,
 				2A5768521C63CD8900947B25 /* SecondViewController.xib */,
+				2A5768561C6517C600947B25 /* RateVIew.h */,
+				2A5768571C6517C600947B25 /* RateVIew.m */,
 				2A5768491C5AEC3700947B25 /* Pins.h */,
 				2A57684A1C5AEC3700947B25 /* Pins.m */,
 				2A5768341C5AD74F00947B25 /* Main.storyboard */,
+				2AE0E4831C7BB92B0050ACA8 /* CameraViewController.h */,
+				2AE0E4841C7BB92B0050ACA8 /* CameraViewController.m */,
 				2A57683A1C5AD74F00947B25 /* Assets.xcassets */,
 				2A57683C1C5AD74F00947B25 /* LaunchScreen.storyboard */,
 				2A57683F1C5AD74F00947B25 /* Info.plist */,
@@ -188,7 +198,9 @@
 				2A57684B1C5AEC3700947B25 /* Pins.m in Sources */,
 				2A5768331C5AD74F00947B25 /* ViewController.m in Sources */,
 				2A5768391C5AD74F00947B25 /* Ski_Places.xcdatamodeld in Sources */,
+				2A5768581C6517C600947B25 /* RateVIew.m in Sources */,
 				2A5768301C5AD74F00947B25 /* AppDelegate.m in Sources */,
+				2AE0E4851C7BB92B0050ACA8 /* CameraViewController.m in Sources */,
 				2A5768551C63DE8700947B25 /* Notes.m in Sources */,
 				2A57682D1C5AD74F00947B25 /* main.m in Sources */,
 			);
@@ -337,6 +349,7 @@
 				2A5768441C5AD74F00947B25 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
