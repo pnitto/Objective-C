@@ -17,7 +17,7 @@
 		2A5768461C5AEB8F00947B25 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A5768451C5AEB8F00947B25 /* MapKit.framework */; };
 		2A5768481C5AEB9C00947B25 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A5768471C5AEB9C00947B25 /* CoreLocation.framework */; };
 		2A57684B1C5AEC3700947B25 /* Pins.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A57684A1C5AEC3700947B25 /* Pins.m */; };
-		2A57684E1C5AECB600947B25 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A57684D1C5AECB600947B25 /* SecondViewController.m */; };
+		2A57684E1C5AECB600947B25 /*  SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A57684D1C5AECB600947B25 /*  SecondViewController.m */; };
 		2A5768501C5AED1800947B25 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A57684F1C5AED1800947B25 /* MessageUI.framework */; };
 		2A5768531C63CD8900947B25 /* SecondViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2A5768521C63CD8900947B25 /* SecondViewController.xib */; };
 		2A5768551C63DE8700947B25 /* Notes.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A5768541C63DE8700947B25 /* Notes.m */; };
@@ -42,7 +42,7 @@
 		2A5768491C5AEC3700947B25 /* Pins.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pins.h; sourceTree = "<group>"; };
 		2A57684A1C5AEC3700947B25 /* Pins.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Pins.m; sourceTree = "<group>"; };
 		2A57684C1C5AECB600947B25 /* SecondViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SecondViewController.h; path = ../SecondViewController.h; sourceTree = "<group>"; };
-		2A57684D1C5AECB600947B25 /* SecondViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SecondViewController.m; path = ../SecondViewController.m; sourceTree = "<group>"; };
+		2A57684D1C5AECB600947B25 /*  SecondViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = " SecondViewController.m"; path = "../ SecondViewController.m"; sourceTree = "<group>"; };
 		2A57684F1C5AED1800947B25 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		2A5768511C5AF37400947B25 /* Location.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = Location.gpx; path = ../Location.gpx; sourceTree = "<group>"; };
 		2A5768521C63CD8900947B25 /* SecondViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SecondViewController.xib; sourceTree = "<group>"; };
@@ -93,7 +93,7 @@
 				2A57682E1C5AD74F00947B25 /* AppDelegate.h */,
 				2A57682F1C5AD74F00947B25 /* AppDelegate.m */,
 				2A57684C1C5AECB600947B25 /* SecondViewController.h */,
-				2A57684D1C5AECB600947B25 /* SecondViewController.m */,
+				2A57684D1C5AECB600947B25 /*  SecondViewController.m */,
 				2A5768541C63DE8700947B25 /* Notes.m */,
 				2A5768311C5AD74F00947B25 /* ViewController.h */,
 				2A5768321C5AD74F00947B25 /* ViewController.m */,
@@ -194,7 +194,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2A57684E1C5AECB600947B25 /* SecondViewController.m in Sources */,
+				2A57684E1C5AECB600947B25 /*  SecondViewController.m in Sources */,
 				2A57684B1C5AEC3700947B25 /* Pins.m in Sources */,
 				2A5768331C5AD74F00947B25 /* ViewController.m in Sources */,
 				2A5768391C5AD74F00947B25 /* Ski_Places.xcdatamodeld in Sources */,

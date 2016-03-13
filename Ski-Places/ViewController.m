@@ -251,7 +251,7 @@ CameraViewControllerDelegate>
     detailViewController.ratingArray = details.averageRating;
     detailViewController.averageRating = details.rating;
 
-    NSLog(@"Name: %@, Average: %@",details.title, details.rating);
+    NSLog(@"Name: %@, Average: %f",details.title, details.rating);
     NSLog(@"Rating List: %@", details.averageRating);
 }
 -(void)secondViewControllerIsDone:(SecondViewController *)SecondViewController {

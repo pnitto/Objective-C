@@ -32,6 +32,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *averageRatingLabel;
 @property (strong, nonatomic) IBOutlet UITableView *commentTable;
 
+- (void)insertRowsAtIndexPaths:(NSArray<NSIndexPath *> *)indexPaths
+              withRowAnimation:(UITableViewRowAnimation)animation;
 
 - (IBAction)submitRating:(id)sender;
 - (IBAction)submitComment:(id)sender;

@@ -9,6 +9,8 @@
 #import "SecondViewController.h"
 #import "ViewController.h"
 #import "AppDelegate.h"
+#define comment_url "http://localhost:3000/titles"
+
 
 @interface SecondViewController()
 
@@ -34,7 +36,6 @@
     self.rateView.delegate = self;
     self.averageRatingLabel.text = [NSString stringWithFormat:@"%f",self.averageRating];
 
-
     self.commentField.textColor = [UIColor colorWithRed:0/256.0 green:84/256.0 blue:129/256.0 alpha:1.0];
     self.commentField.font = [UIFont fontWithName:@"Helvetica-Bold" size:25];
     self.commentField.backgroundColor=[UIColor greenColor];
@@ -47,7 +48,7 @@
 }
 
 -(void)fetchData {
-    NSURL *url = [NSURL URLWithString:@"http://localhost:3000/skiPlaceCollection"];
+    NSURL *url = [NSURL URLWithString:@comment_url];
     
     NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:url];
     request.HTTPMethod = @"GET";
@@ -61,12 +62,13 @@
     NSURLSessionDataTask *getDataTask = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error){
         NSLog(@"response: %@", response);
         //NSLog(@"error: %@", error);
+     
         NSMutableArray *commentList = [NSJSONSerialization JSONObjectWithData:data options:0 error:NULL];
         for(int x=0; x<[commentList count]; x++){
-            [self.commentArray addObject:[commentList[x] objectForKey:@"title"]];
+            [self.commentArray addObject:[commentList[x] objectForKey:@"comment"]];
             NSLog(@"Comments: %@", self.commentArray);
             [self.commentTable reloadData];
-        }
+            }
     }];
     [getDataTask resume];
 
@@ -97,7 +99,6 @@
     }
     return cell;
 }
-
 -(void)rateView:(RateVIew *)rateView ratingDidChange:(float)rating {
     self.rateLabel.text = [NSString stringWithFormat:@"Rating:%f",self.rateView.rating];
 }
@@ -115,23 +116,36 @@
     self.averageRatingLabel.text = [NSString stringWithFormat:@"%f",self.averageRating];
     NSLog(@"List count:%li",self.ratingArray.count);
 }
-
+//need to do a check when the textfield is blank, so it doesn't add a row to the tableview
 -(void)submitComment:(id)sender {
+    /*
     NSString *comment = [NSString stringWithFormat:self.commentField.text];
     NSLog(@"Comment: %@", comment);
-    NSURL *url = [NSURL URLWithString:@"http://localhost:3000/skiPlaceCollection"];
+    */ 
     
     NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
     NSURLSession *session = [NSURLSession sessionWithConfiguration:config];
     
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
-    request.HTTPMethod = @"POST";
+    NSMutableDictionary *input = [[NSMutableDictionary alloc] init];
+    [input setObject:self.commentField.text forKey:@"comment"];
+    [input setObject:self.skiPlaceName.text forKey:@"placeName"];
     
-    //NSDictionary *postDic = @{@"title":@"hello"};
+    NSLog(@"dic data: %@", input);
     NSError *error = nil;
-    NSData *data = [[NSString stringWithFormat:@"title=%@",comment] dataUsingEncoding:NSUTF8StringEncoding];
-    //[NSJSONSerialization dataWithJSONObject:postDic options:0 error:&error];
-    NSLog(@"Post Data: %@", data);
+    
+    NSData *data = [NSJSONSerialization dataWithJSONObject:input options:0 error:&error];
+    NSLog(@"Json Data: %@", data);
+    
+    NSString *datalength = [NSString stringWithFormat:@"%lu", [data length]];
+    NSLog(@"Length: %@", datalength);
+    
+    NSURL *url = [NSURL URLWithString:@comment_url];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+    
+    [request setHTTPMethod:@"POST"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [request setValue:datalength forHTTPHeaderField:@"Content-Length"];
+    [request setHTTPBody:data];
     
     if(!error) {
         NSURLSessionUploadTask *uploadTask = [session uploadTaskWithRequest:request fromData:data completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
@@ -139,8 +153,14 @@
             NSLog(@"Error: %@", error);
         }];
         [uploadTask resume];
-    }
-}
+        }
+    //adds the dictionary object comment key to the comment array, then puts the object at the end of the indexpath array, animates the insertion
+     [self.commentArray addObject:input[@"comment"]];
+     NSIndexPath *newIndexPath = [NSIndexPath indexPathForRow:self.commentArray.count - 1 inSection:0];
+     [self.commentTable beginUpdates];
+     [self.commentTable insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationTop];
+     [self.commentTable endUpdates];
+     }
 
 @end
 
