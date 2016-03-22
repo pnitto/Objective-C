@@ -8,6 +8,15 @@
 
 #import "AppTheme.h"
 
-@implementation AppTheme
+@implementation UIColor (AppTheme)
+
++ (UIColor *)WoozlePurpleColor
+{
+    return [UIColor colorWithRed:38.0/255.0 green:29.0/255.0 blue:84.0/255.0 alpha:1.0];
+}
++(UIColor *)WoozleGreyColor
+{
+    return [UIColor colorWithRed:219.0/255.0 green:220.0/255.9 blue:222.0/255.0 alpha:1.0];
+}
 
 @end

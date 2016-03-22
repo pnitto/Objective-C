@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="OFA-VJ-Wqx">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="uVN-xu-4KY">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fb0-e5-5pz">
-                                <rect key="frame" x="-5" y="75" width="405" height="202"/>
+                                <rect key="frame" x="0.0" y="64" width="425" height="210"/>
                             </mapView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Latitude:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FuN-1V-idy">
                                 <rect key="frame" x="32" y="243" width="68" height="21"/>
@@ -45,13 +45,6 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1IJ-Ip-pN2">
-                                <rect key="frame" x="255" y="86" width="125" height="30"/>
-                                <state key="normal" title="Center on Region"/>
-                                <connections>
-                                    <action selector="centerOnUser:" destination="BYZ-38-t0r" eventType="touchUpInside" id="eYQ-8v-YJB"/>
-                                </connections>
-                            </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="eP6-RJ-Ega">
                                 <rect key="frame" x="22" y="296" width="373" height="260"/>
                                 <color key="backgroundColor" red="0.31918260180000002" green="0.49189530669999998" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -72,6 +65,13 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="9MJ-kF-bNP"/>
                                 </connections>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1IJ-Ip-pN2">
+                                <rect key="frame" x="281" y="72" width="125" height="30"/>
+                                <state key="normal" title="Center on Region"/>
+                                <connections>
+                                    <action selector="centerOnUser:" destination="BYZ-38-t0r" eventType="touchUpInside" id="eYQ-8v-YJB"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -80,7 +80,7 @@
                     <navigationItem key="navigationItem" title="Ski Places" id="33Z-S7-et1">
                         <rightBarButtonItems>
                             <barButtonItem id="iN9-Ro-d49"/>
-                            <barButtonItem style="plain" id="HRd-5z-Q3K">
+                            <barButtonItem id="HRd-5z-Q3K">
                                 <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="9id-PY-ayl">
                                     <rect key="frame" x="136" y="564" width="145" height="30"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -104,7 +104,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1000" y="-34"/>
+            <point key="canvasLocation" x="1812" y="-34"/>
         </scene>
         <!--Camera View Controller-->
         <scene sceneID="ynG-pa-1l1">
@@ -144,25 +144,25 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6OW-2b-j2O" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1682" y="-34"/>
+            <point key="canvasLocation" x="2494" y="-34"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="YpX-Fj-8U1">
+        <!--Ski Places-->
+        <scene sceneID="NbE-sA-F1N">
             <objects>
-                <navigationController storyboardIdentifier="NavigationControllerID" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="OFA-VJ-Wqx" sceneMemberID="viewController">
+                <navigationController title="Ski Places" automaticallyAdjustsScrollViewInsets="NO" id="uVN-xu-4KY" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="4zr-x8-GeO">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="PZ1-5D-6KS">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="j5o-Cd-yxb"/>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="Swp-ht-arM"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="BAr-1x-y91" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="b0C-aW-ryB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="362" y="-22"/>
+            <point key="canvasLocation" x="1000" y="-34"/>
         </scene>
     </scenes>
 </document>

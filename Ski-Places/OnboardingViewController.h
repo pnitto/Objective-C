@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LaunchViewController : UIViewController
+@interface OnboardingViewController : UIViewController
 
 @end

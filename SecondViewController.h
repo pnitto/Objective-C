@@ -29,12 +29,12 @@
 @property (nonatomic,strong) NSMutableArray *ratingArray;
 @property float averageRating;
 @property (nonatomic, strong) NSMutableArray *commentArray;
+@property (nonatomic, strong) NSMutableArray *dataArray;
 @property (weak, nonatomic) IBOutlet UILabel *averageRatingLabel;
 @property (strong, nonatomic) IBOutlet UITableView *commentTable;
 
-- (void)insertRowsAtIndexPaths:(NSArray<NSIndexPath *> *)indexPaths
-              withRowAnimation:(UITableViewRowAnimation)animation;
 
+- (IBAction)deleteRow:(id)sender;
 - (IBAction)submitRating:(id)sender;
 - (IBAction)submitComment:(id)sender;
 

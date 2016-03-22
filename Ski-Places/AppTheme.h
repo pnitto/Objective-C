@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AppTheme : UIColor
+@interface UIColor (AppTheme)
+
++ (UIColor*)WoozlePurpleColor;
++ (UIColor*)WoozleGreyColor;
 
 @end

@@ -10,6 +10,7 @@
 #import "Pins.h"
 #import "SecondViewController.h"
 #import "CameraViewController.h"
+#import "AppTheme.h"
 #define METERS_MILE 1609.344
 #define METERS_FEET 3.28084
 #define beechLat -81.87767028808594
@@ -23,6 +24,7 @@
  SecondViewControllerDelegate,
 CameraViewControllerDelegate>
 @end
+double (^distanceFromRateAndTime)(double rate, double time);
 
 @implementation ViewController
 //void means it returns nothing
@@ -109,6 +111,26 @@ CameraViewControllerDelegate>
     //adding all the pins to mapView
     [self.mapView addAnnotations:self.skiPlaces];
 }
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    /*Blocks
+    distanceFromRateAndTime = ^double(double rate, double time) {
+        return rate * time;
+    };
+    
+    double dx = distanceFromRateAndTime(arc4random(), 1.5);
+    
+    __block int i = 0;
+    int(^count)(void) = ^ {
+        i += 1;
+        return i;
+    };
+    NSLog(@"Count:%d",count());
+
+    NSLog(@"Testing Block: %.2f",dx);
+     */
+}
 //initialize CLLocationManager object
 -(void)startStandardUpdates {
     self.locationManager = [[CLLocationManager alloc] init];
@@ -145,15 +167,53 @@ CameraViewControllerDelegate>
 }
 
 -(void) locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations {
-    CLLocation *location = locations.lastObject;
-    NSLog(@"location list: %@", location);
-    [[self longLabel] setText:[NSString stringWithFormat:@"%.6f", location.coordinate.latitude]];
-    [[self latLabel] setText:[NSString stringWithFormat:@"%.6f", location.coordinate.longitude]];
-    //NSLog(@"latitude %+.6f, longitude %+.6f\n", location.coordinate.latitude, location.coordinate.longitude);
+    NSLog(@"location manager: %@", manager.location);
+    
+    if(manager.location){
+        CLLocation *last_location = manager.location;
+    
+        [[self latLabel] setText:[NSString stringWithFormat:@"%.6f", last_location.coordinate.latitude ]];
+        [[self longLabel] setText:[NSString stringWithFormat:@"%.6f", last_location.coordinate.longitude]];
+
+    
     
     /*MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, 10*METERS_MILE, 10*METERS_MILE);
      [[self mapView] setRegion:viewRegion animated:YES];
      */
+    
+    NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:config];
+    
+    NSMutableDictionary *loc_input = [[NSMutableDictionary alloc] init];
+    
+    NSString *lat = [NSString stringWithFormat:@"%f",last_location.coordinate.latitude];
+    NSString *longitude = [NSString stringWithFormat:@"%f",last_location.coordinate.longitude];
+    
+    [loc_input setObject:lat forKey:@"latitude"];
+    [loc_input setObject:longitude forKey:@"longitude"];
+    
+    NSError *error;
+    NSData *data = [NSJSONSerialization dataWithJSONObject:loc_input options:0 error:&error];
+    
+    NSString *loc_length = [NSString stringWithFormat:@"%lu",[data length]];
+    NSURL *url = [NSURL URLWithString:@"http://127.0.0.1:5000/location/add_location"];
+
+        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+    
+    [request setHTTPMethod:@"POST"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [request setValue:loc_length forHTTPHeaderField:@"Content-Length"];
+    [request setHTTPBody:data];
+    
+    if(!error) {
+        NSURLSessionUploadTask *uploadTask = [session uploadTaskWithRequest:request fromData:data completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+            NSLog(@"Response: %@", response);
+            //NSLog(@"Error: %@", error);
+        }];
+        [uploadTask resume];
+     }
+  
+    }
 }
 
 //checking to see if the user granted access to their location (could change)
@@ -174,7 +234,7 @@ CameraViewControllerDelegate>
     [self.locationManager requestStateForRegion:region];
 }
 -(void)locationManager:(CLLocationManager *)manager monitoringDidFailForRegion:(CLRegion *)region withError:(NSError *)error{
-    NSLog(@"This an error %@", error);
+    NSLog(@"Error: %@", error);
 }
 
 -(void)locationManager:(CLLocationManager *)manager didEnterRegion:(CLRegion *)region {
@@ -213,8 +273,8 @@ CameraViewControllerDelegate>
     NSLog(@"Clicked %@", cell.textLabel.text);
     [self.mapView selectAnnotation:[self.skiPlaces objectAtIndex:indexPath.row] animated:YES];
 }
-// checks to see if the class is a user's location object, adds an image to the leftcalloutaccessory, changed pin color to green
 
+// checks to see if the class is a user's location object, adds an image to the leftcalloutaccessory, changed pin color to green
 -(MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
     
     if ([annotation isKindOfClass:[MKUserLocation class]])
@@ -223,7 +283,7 @@ CameraViewControllerDelegate>
     MKPinAnnotationView *aView =(MKPinAnnotationView*) [self.mapView dequeueReusableAnnotationViewWithIdentifier:@"imageView"];
     aView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"imageView"];
     aView.canShowCallout = YES;
-    aView.pinTintColor = UIColor.greenColor;
+    aView.pinTintColor = [UIColor WoozleGreyColor];
     aView.leftCalloutAccessoryView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
     [(UIImageView *)aView.leftCalloutAccessoryView setImage:[UIImage imageNamed:@"boarding"]];
     
@@ -238,14 +298,19 @@ CameraViewControllerDelegate>
 }
 
 -(void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
-    SecondViewController *detailViewController = [[SecondViewController alloc] init];
+
+    SecondViewController *detailViewController = [[SecondViewController alloc] initWithNibName:@"SecondViewController" bundle:nil];
+
     detailViewController.delegate = self;
 
-    [self presentViewController:detailViewController animated:YES completion:nil];
-    Pins *details = view.annotation;
-    NSLog(@"details: %@", view.annotation.title);
-
     //[self.navigationController pushViewController:detailViewController animated:YES];
+
+    [self presentViewController:detailViewController animated:YES completion:nil];
+
+    NSLog(@"details: %@", view.annotation.title);
+    Pins *details = view.annotation;
+    
+    
     detailViewController.skiPlaceName.text = details.title;
     detailViewController.placeDescription.text = details.subtitle;
     detailViewController.ratingArray = details.averageRating;

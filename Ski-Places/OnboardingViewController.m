@@ -6,18 +6,22 @@
 //  Copyright © 2016 Paul Nitto. All rights reserved.
 //
 
-#import "LaunchViewController.h"
+#import "OnboardingViewController.h"
 #import "CoreLocation/CoreLocation.h"
+#import "AppTheme.h"
 
-@interface LaunchViewController ()
+@interface OnboardingViewController()
+@property (strong, nonatomic) IBOutlet UILabel *onBoardingLabel;
 
 @end
 
-@implementation LaunchViewController
+@implementation OnboardingViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    self.onBoardingLabel.textColor = [UIColor WoozlePurpleColor];
 }
 
 - (void)didReceiveMemoryWarning {

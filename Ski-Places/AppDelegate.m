@@ -7,6 +7,11 @@
 //
 
 #import "AppDelegate.h"
+#import "AppTheme.h"
+#import "AppThemeWindow.h"
+#import "ViewController.h"
+#import "AppStateTransitioner.h"
+#import "SessionManager.h"
 
 @interface AppDelegate ()
 @end
@@ -16,11 +21,53 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    return YES;
+    
+    //self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    //[[UINavigationBar appearanceWhenContainedInInstancesOfClasses:@[[AppThemeWindow class]]] setBarTintColor:[UIColor WoozlePurpleColor]];
+    
+    self.window.tintColor = [UIColor WoozlePurpleColor];
+    
+    NSLog(@"Screen size: %@",[UIScreen mainScreen]);
+    NSLog(@"window: %@", self.window);
+    
+    if ([[SessionManager sharedSession] isLoggedIn]) {
+        
+        NSLog(@"Application launching with existing user information.");
+        
+    } else
+    {
+        NSLog(@"Application launching for first time user.");
+    }
+    
+    if ([CLLocationManager authorizationStatus] != kCLAuthorizationStatusAuthorizedAlways) {
+        
+        NSLog(@"Location Services are not authorized. Sending to onboarding.");
+        
+        //Transition to onboarding
+        [AppStateTransitioner transitionToOnBoardingAnimated:NO];
+    }
+    else
+    {
+        NSLog(@"Location Services are already authorized. Sending to main app.");
+        
+        if ([[SessionManager sharedSession] isLoggedIn]) {
+            
+            //Transition to main app
+            [AppStateTransitioner transitionToMainAppAnimated:NO];
+        }
+        else
+        {
+            NSLog(@"Error with Transitioning");
+        }
+    }
+    [self.window makeKeyAndVisible];
+     return YES;
 }
+/*
 - (BOOL)application:(UIApplication *)application willFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     return YES;
 }
+ */
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
@@ -42,9 +89,9 @@
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     // Saves changes in the application's managed object context before the application terminates.
-    [self saveContext];
+    //[self saveContext];
 }
-
+/*
 - (BOOL)application:(UIApplication *)application shouldSaveApplicationState:(NSCoder *)coder
 {
     return YES;
@@ -54,10 +101,10 @@
 {
     return YES;
 }
-
+*/
 
 #pragma mark - Core Data stack
-
+/*
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
@@ -135,5 +182,5 @@
         }
     }
 }
-
+*/
 @end

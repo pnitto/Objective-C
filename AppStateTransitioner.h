@@ -10,4 +10,8 @@
 
 @interface AppStateTransitioner : NSObject
 
++(void)transitionToOnBoardingAnimated: (BOOL)animated;
+
++(void)transitionToMainAppAnimated:(BOOL)animated;
+
 @end
